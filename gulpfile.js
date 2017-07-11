@@ -9,6 +9,7 @@ var include = require('gulp-include');
 var sass = require('gulp-sass');
 var watch = require('gulp-watch');
 var sourcemaps = require('gulp-sourcemaps');
+var concat = require('gulp-concat');
 
 /*
 
@@ -41,6 +42,7 @@ gulp.task('watch', function(){
   gulp.watch('*', ['livereload']);
   gulp.watch('html_src/**', ['include', 'livereload']);
   gulp.watch('css_src/**', ['sass', 'livereload']);
+  gulp.watch('js_src/**', ['tabmenu', 'livereload']);
 });
 
 // header,footer, 공통영역 분리 기능
@@ -60,6 +62,13 @@ gulp.task('sass', function(){
       .pipe(gulp.dest('css/'));
 });
 
+// concat 실행 여러개의 파일을 하나의 파일로 합치는 기능
+gulp.task('tabmenu', function() {
+  return gulp.src('js_src/tab_menu/*.js')
+      .pipe(sourcemaps.init())
+      .pipe(concat('tab_menu.js'))
+      .pipe(sourcemaps.write())
+      .pipe(gulp.dest('js/'));
+});
 
-
-gulp.task('default',['livereload', 'include', 'sass', 'watch']);
+gulp.task('default',['livereload', 'include', 'sass', 'tabmenu', 'watch']);
