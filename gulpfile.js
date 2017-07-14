@@ -2,7 +2,7 @@
  * Created by Administrator on 2017-07-03.
  */
 
-// ¸é¼ö¼±¾ğ = require('¸ğµâÀÌ¸§');
+// ë³€ìˆ˜ì„ ì–¸ = require('ëª¨ë“ˆì´ë¦„');
 var gulp = require('gulp');
 var livereload = require('gulp-livereload');
 var include = require('gulp-include');
@@ -13,25 +13,13 @@ var concat = require('gulp-concat');
 
 /*
 
-gulp.task( task ÀÌ¸§, ÇÔ¼ö/ÀÍ¸íÇÔ¼ö );
+gulp.task( taskì´ë¦„, í•¨ìˆ˜/ìµëª…í•¨ìˆ˜ );
 
  */
 
-gulp.task('hello1', function () {
-  return console.log('Hello World1');
-});
+// pipe()ëŠ” ëª¨ë“ˆì˜ ê¸°ëŠ¥ì„ ì‹¤í–‰í•´ì£¼ëŠ” í•¨ìˆ˜
 
-gulp.task('hello2', function () {
-  return console.log('Hello World2');
-});
-
-gulp.task('hello3', function () {
-  return console.log('Hello World3');
-});
-
-// pipe()´Â ¸ğµâÀÇ ±â´ÉÀ» ½ÇÇàÇØÁÖ´Â ÇÔ¼ö
-
-// »õ·Î °íÄ§
+// ìƒˆë¡œ ê³ ì¹¨
 gulp.task('livereload', function(){
   gulp.src(['hrml/*', 'css/*', 'js/*', '*'])
       .pipe( livereload() );
@@ -42,10 +30,10 @@ gulp.task('watch', function(){
   gulp.watch('*', ['livereload']);
   gulp.watch('html_src/**', ['include', 'livereload']);
   gulp.watch('css_src/**', ['sass', 'livereload']);
-  gulp.watch('js_src/**', ['tabmenu', 'livereload']);
+  gulp.watch('js_src/**', ['jsconcat', 'livereload']);
 });
 
-// header,footer, °øÅë¿µ¿ª ºĞ¸® ±â´É
+// header, footer, ê³µí†µì˜ì—­ ë¶„ë¦¬
 gulp.task('include', function(){
   gulp.src("html_src/*.html")
       .pipe(include())
@@ -53,7 +41,7 @@ gulp.task('include', function(){
       .pipe(gulp.dest("html/"));
 });
 
-// sass ½ÇÇà
+// sass ì‹¤í–‰
 gulp.task('sass', function(){
   return gulp.src('css_src/*.scss')
       .pipe(sourcemaps.init())
@@ -62,7 +50,7 @@ gulp.task('sass', function(){
       .pipe(gulp.dest('css/'));
 });
 
-// concat ½ÇÇà ¿©·¯°³ÀÇ ÆÄÀÏÀ» ÇÏ³ªÀÇ ÆÄÀÏ·Î ÇÕÄ¡´Â ±â´É
+// concat ì‹¤í–‰ - ì—¬ëŸ¬ ê°œì˜ íŒŒì¼ì„ í•˜ë‚˜ì˜ íŒŒì¼ë¡œ í•©ì¹˜ëŠ” ê¸°ëŠ¥
 gulp.task('tabmenu', function() {
   return gulp.src('js_src/tab_menu/*.js')
       .pipe(sourcemaps.init())
@@ -71,4 +59,30 @@ gulp.task('tabmenu', function() {
       .pipe(gulp.dest('js/'));
 });
 
-gulp.task('default',['livereload', 'include', 'sass', 'tabmenu', 'watch']);
+gulp.task('gnbmenu', function() {
+  return gulp.src('js_src/gnb_menu/*.js')
+      .pipe(sourcemaps.init())
+      .pipe(concat('gnb_menu.js'))
+      .pipe(sourcemaps.write())
+      .pipe(gulp.dest('js/'));
+});
+
+gulp.task('timingfunction', function() {
+  return gulp.src('js_src/timing_function/*.js')
+      .pipe(sourcemaps.init())
+      .pipe(concat('timing_function.js'))
+      .pipe(sourcemaps.write())
+      .pipe(gulp.dest('js/'));
+});
+
+gulp.task('imagesliding', function() {
+  return gulp.src('js_src/image_sliding/*.js')
+      .pipe(sourcemaps.init())
+      .pipe(concat('image_sliding.js'))
+      .pipe(sourcemaps.write())
+      .pipe(gulp.dest('js/'));
+});
+
+gulp.task('jsconcat', ['tabmenu', 'gnbmenu', 'timingfunction', 'imagesliding']);
+
+gulp.task('default',['livereload', 'include', 'sass', 'jsconcat', 'watch']);
