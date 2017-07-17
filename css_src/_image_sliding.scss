@@ -1,92 +1,162 @@
-.box{
-  width: 100px;
-  height: 100px;
-  background: palevioletred;
+/* jQuery 이미지 슬라이딩 */
+.js-sliding{
+
+  .rolling{
+    width:300px;
+    position:relative;
+    left:50%;
+    margin-left: -150px;
+  }
+
+  .view{
+    width:300px;
+    height:450px;
+    overflow:hidden;
+    position:relative;
+  }
+
+  .view-image{
+    display: block;
+    position: absolute;
+    top:0;
+    left:0;
+  }
+
+  .arrow-wrap{
+    width:100%;
+    position:absolute;
+    top:50%;
+    margin-top:-15px;
+    left:0;
+  }
+
+  .arrow{
+    display: block;
+    width: 30px;
+    height: 30px;
+    border:0;
+    background: url(../images/arrow_sprite.png) no-repeat;
+    text-indent: -99999em;
+    cursor: pointer;
+    position:absolute;
+    top:0;
+    left:0;
+  }
+
+  .arrow.right{
+    background-position:-30px 0;
+    left:auto;
+    right:0;
+  }
+
+  .control-wrap{
+    position: absolute;
+    left: 50%;
+
+  }
+
+  .control-wrap:after{
+    content: "";
+    display: block;
+    clear: both;
+  }
+
+  .paging,
+  .play-wrap{
+    float: left;
+    margin: 0;
+    padding: 0;
+  }
+
+  .paging-item{
+    float: left;
+    list-style-type: none;
+    margin-right: 10px;
+  }
 }
 
-.box1,
-.box2,
-.box3,
-.box4{
-  position: relative;
-  top:0;
-  left:0;
-}
+/* CSS 이미지 슬라이딩 */
+.css-sliding{
 
-/* 이미지 슬라이딩 */
-.title{
-  text-align: center;
-}
+  &-rolling{
+    width:300px;
+    position:relative;
+    left:50%;
+    margin-left: -150px;
+  }
 
-.rolling{
-  width:300px;
-  position:relative;
-  left:50%;
-  margin-left: -150px;
-}
+  &-view{
+    width:300px;
+    height:450px;
+    overflow:hidden;
+    position:relative;
+  }
 
-.view{
-  width:300px;
-  height:450px;
-  overflow:hidden;
-  position:relative;
-}
+  &-view-image{
+    display: block;
+    position: absolute;
 
-.view-image{
-  display: block;
-  position: absolute;
-  top:0;
-  left:0;
-}
+    &.left{
+      transform:translate(-100%,0);
+    }
 
-.arrow-wrap{
-  width:100%;
-  position:absolute;
-  top:50%;
-  margin-top:-15px;
-  left:0;
-}
+    &.center{
+      transform:translate(0,0);
+    }
 
-.arrow{
-  display: block;
-  width: 30px;
-  height: 30px;
-  border:0;
-  background: url(../images/arrow_sprite.png) no-repeat;
-  text-indent: -99999em;
-  cursor: pointer;
-  position:absolute;
-  top:0;
-  left:0;
-}
+    &.right{
+      transform:translate(100%,0);
+    }
 
-.arrow.right{
-  background-position:-30px 0;
-  left:auto;
-  right:0;
-}
+    &.ani{
+    transition:transform 1s ease;
+    }
+  }
 
-.control-wrap{
-  position: absolute;
-  left: 50%;
+  &-arrow-wrap{
+    width:100%;
+    position:absolute;
+    top:50%;
+    margin-top:-15px;
+    left:0;
+  }
 
-}
+  &-arrow{
+    display: block;
+    width: 30px;
+    height: 30px;
+    border:0;
+    background: url(../images/arrow_sprite.png) no-repeat;
+    text-indent: -99999em;
+    cursor: pointer;
+    position:absolute;
+    top:0;
+    left:0;
+  }
 
-.control-wrap:after{
-  content: "";
-  display: block;
-  clear: both;
-}
+  &-arrow.right{
+    background-position:-30px 0;
+    left:auto;
+    right:0;
+  }
 
-.paging,
-.play-wrap{
-  float: left;
-  margin: 0;
-  padding: 0;
-}
+  &-control-wrap{
+    position: absolute;
+    left: 50%;
 
-.paging-item{
-  float: left;
-  list-style-type: none;
-  margin-right: 10px;
+    @extend %clearfix;
+  }
+
+  &-paging,
+  &-play-wrap{
+    float: left;
+    margin: 0;
+    padding: 0;
+  }
+
+  &-paging-item{
+    float: left;
+    list-style-type: none;
+    margin-right: 10px;
+  }
 }

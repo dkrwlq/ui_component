@@ -5,9 +5,9 @@ $(function(){
 
   // 선언부
   function init(){
-    $('.view-image').eq(0).css({left : 0});
-    $('.view-image').eq(1).css({left : 300});
-    $('.view-image').eq(2).css({left : -300});
+    $('.js-sliding .view-image').eq(0).css({left : 0});
+    $('.js-sliding .view-image').eq(1).css({left : 300});
+    $('.js-sliding .view-image').eq(2).css({left : -300});
 
     marginCtrlWrap();
     paging();
@@ -21,14 +21,14 @@ $(function(){
 
   function moveLeft(){
 
-    if(nextIndex >= $('.view-image').length){
+    if(nextIndex >= $('.js-sliding .view-image').length){
       nextIndex = 0;
     }
 
 
-    $('.view-image').eq(currentIndex).stop().animate({left:-300}, 2000, 'easeOutBounce');
+    $('.js-sliding .view-image').eq(currentIndex).stop().animate({left:-300}, 2000, 'easeOutBounce');
 
-    $('.view-image').eq(nextIndex).css({left:300}).stop().animate({left:0}, 2000, 'easeOutBounce');
+    $('.js-sliding .view-image').eq(nextIndex).css({left:300}).stop().animate({left:0}, 2000, 'easeOutBounce');
 
 
     currentIndex = nextIndex;
@@ -39,13 +39,13 @@ $(function(){
   function moveRight(){
 
     if(nextIndex <= -1){
-      nextIndex = $('.view-image').length-1;
+      nextIndex = $('.js-sliding .view-image').length-1;
     }
 
 
-    $('.view-image').eq(currentIndex).stop().animate({left:300}, 2000, 'easeOutBounce');
+    $('.js-sliding .view-image').eq(currentIndex).stop().animate({left:300}, 2000, 'easeOutBounce');
 
-    $('.view-image').eq(nextIndex).css({left:-300}).stop().animate({left:0}, 2000, 'easeOutBounce');
+    $('.js-sliding .view-image').eq(nextIndex).css({left:-300}).stop().animate({left:0}, 2000, 'easeOutBounce');
 
 
     currentIndex = nextIndex;
@@ -63,20 +63,20 @@ $(function(){
 
   function marginCtrlWrap(){
 
-    var wrapWidth = $('.control-wrap').width();
+    var wrapWidth = $('.js-sliding .control-wrap').width();
 
-    $('.control-wrap').css({
+    $('.js-sliding .control-wrap').css({
       'margin-left' : -( wrapWidth / 2 )
     });
   }
 
   function paging(){
 
-    var imgNumber = $('.view-image').length;
+    var imgNumber = $('.js-sliding .view-image').length;
 
     for(var i=0; i<imgNumber; i++){
 
-      $('.paging').append('<li class="paging-item"><a href="#" class="paging-link">' + (i+1) + '</a></li>');
+      $('.js-sliding .paging').append('<li class="paging-item"><a href="#" class="paging-link">' + (i+1) + '</a></li>');
 
     }
   }
